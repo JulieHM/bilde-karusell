@@ -13,6 +13,7 @@ export const Carousel = ({
   backgroundColor,
 }: CarouselProps) => {
   const [data, setData] = React.useState<string[]>([]);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchImageData = async () => {
@@ -24,7 +25,7 @@ export const Carousel = ({
         },
       };
       let response = await fetch(
-        `https://api.pexels.com/v1/search?query=ocean&page=1&per_page=${numberOfElements}`,
+        `https://api.pexels.com/v1/search?query=aurora&page=1&per_page=${numberOfElements}`,
         options
       );
       const data = await response.json();
@@ -36,25 +37,52 @@ export const Carousel = ({
       console.log(newData);
       setData([...newData]);
     };
-
-    fetchImageData();
+    if (numberOfElements) {
+      fetchImageData();
+    }
   }, [numberOfElements]);
+
+  const handleNext = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        behavior: "smooth",
+        left: scrollRef.current.clientWidth / 2,
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        behavior: "smooth",
+        left: -scrollRef.current.clientWidth / 2,
+      });
+    }
+  };
 
   return (
     <div
       className={styles["carouselWrapper"]}
       style={{ backgroundColor: `${backgroundColor}` }}
     >
+      <button
+        onClick={handlePrev}
+        className={`${styles.slideButtons} ${styles.prev}`}
+      >
+        &#8592;
+      </button>
+      <button
+        onClick={handleNext}
+        className={`${styles.slideButtons} ${styles.next}`}
+      >
+        &#8594;
+      </button>
+
       <div
         className={styles["carousel"]}
         style={{ backgroundColor: `${backgroundColor}` }}
+        ref={scrollRef}
       >
-        <button className={`${styles.slideButtons} ${styles.prev}`}>
-          &#8592;
-        </button>
-        <button className={`${styles.slideButtons} ${styles.next}`}>
-          &#8594;
-        </button>
         {data.map((el: any, index) => (
           <div key={index} className={styles["itemWrapper"]}>
             <Image

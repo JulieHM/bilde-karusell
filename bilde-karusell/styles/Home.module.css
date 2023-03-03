@@ -13,6 +13,7 @@
 }
 
 .carouselWrapper{
+  padding-top:2rem;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -37,7 +38,7 @@
 }
 
 .itemWrapper{
-  margin-left: 0.8rem;
+  margin-left: 1rem;
   position: relative;
   display: inline-block;
 }
@@ -48,10 +49,19 @@
 
 .images{
   border-radius: 0.5rem;
-  width: 50vw;
+  width: 40rem;
   height: auto;
   transition: 0.6s all ease-in-out;
 } 
+
+@media (max-width: 760px) {
+  .images{
+    border-radius: 0.5rem;
+    width: 20rem;
+    height: 25rem;
+    object-fit: cover;
+  }
+}
 
 .colorButton{
   border: 5px solid #e8e8e8;
@@ -97,37 +107,3 @@
   right: 2vw;
   top: 15rem;
 }
-/* .slide{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
-  opacity: 1;
-  animation-name: easeIn;
-  animation-duration: 1s;
-  animation-timing-function: ease-in;
-}
-.slide[data-active]{
-  opacity: 1;
-}  */
-
-
-/* 
-.ease-in {
-  animation: ease-in 1s forwards;
-} */
-/* .slide-out {
-  animation: ease-out 1s forwards;
-} */
-
-/* @keyframes easeIn {
-  from {
-    opacity: 0;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-} */

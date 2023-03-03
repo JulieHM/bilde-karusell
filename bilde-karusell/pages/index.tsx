@@ -9,7 +9,14 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home({ data }: any) {
   const [backgroundColor, setBackgroundColor] = React.useState("");
   const [numberOfElements, setNumberOfElements] = React.useState(4);
-  const colors = ["#eeeeee", "#ECF2FF", "#3E54AC", "#655DBB", "#BFACE2"];
+  const colors = [
+    "#eeeeee",
+    "#C6CBFF",
+    "#C0B3D3",
+    "#C7E9DB",
+    "#81B3C5",
+    "#265566",
+  ];
 
   function handleNumberChange(event: any) {
     setNumberOfElements(event.target.value);
@@ -26,7 +33,7 @@ export default function Home({ data }: any) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" />
       </Head>
-      <a href="https://www.pexels.com">Photos provided by Pexels</a>
+
       <div className={styles["container"]}>
         <>
           <Carousel
@@ -58,22 +65,14 @@ export default function Home({ data }: any) {
             onChange={handleColorChange}
           ></input>
         </>
+
+        <a
+          style={{ paddingTop: "10rem", color: "#0e0e0e" }}
+          href="https://www.pexels.com"
+        >
+          Photos provided by Pexels
+        </a>
       </div>
     </>
   );
 }
-
-// export async function getStaticProps() {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       Authorization: "qHhG0qZ4LBNshRczM35xWEUYEj3M4UYHQIX6YOzRgYtzCtlThxXfTPLZ",
-//     },
-//   };
-//   let response = await fetch(
-//     "https://api.pexels.com/v1/search?query=travel&per_page=5",
-//     options
-//   );
-//   let data = await response.json();
-//   return { props: { data } };
-// }
