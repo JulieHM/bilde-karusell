@@ -12,28 +12,46 @@
   width: 15rem;
 }
 
-.carousel{
-   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; 
+.carouselWrapper{
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-top: 1rem;
+  width: 95vw;
+  overflow: hidden;
+  overflow-x: scroll;
+  height: 60vh;
+  max-height: 60vh;
+  border-radius: 0.2rem;
+}
+
+.carousel::-webkit-scrollbar{
+  display: none;
+}
+
+.itemWrapper{
+  margin-left: 0.8rem;
+  position: relative;
+  display: inline-block;
+}
+
+.title{
+  font-size: large;
 }
 
 .images{
   border-radius: 0.5rem;
-  width: 60vw;
+  width: 50vw;
   height: auto;
-  object-fit: cover;
-  object-position: center;
   transition: 0.6s all ease-in-out;
-  position: relative;
-  margin-bottom: 0.5rem;
-}
-
-.hidden{
-  opacity: 0;
-}
+} 
 
 .colorButton{
   border: 5px solid #e8e8e8;
@@ -44,7 +62,6 @@
 }
 .colorButton:active{
   border: 2px solid #ababab;
-  
 }
 
 .colorButton:hover{
@@ -57,31 +74,30 @@
 }
 
 .slideButtons{
-  color: rgb(237, 237, 237);
+  color: rgb(11, 11, 11);
   position: fixed;
   z-index: 1;
   background: none;
   border: none;
   top:50%;
-  transform: translateY(-50%);
+
   cursor: pointer;
-  padding: 1rem .5rem;
-  background-color: rgba(0, 0, 0, .2);
+  padding: 0.5rem 0.7rem;
+  background-color: rgba(255, 255, 255, 0.912);
+  font-size: 1.5rem;
 }
 .slideButtons:hover{
-  background-color: rgba(0, 0, 0, .3);
-  color: #ffffff;
+  color: #7d7d7d;
 }
 .prev{
-  left: 20vw;
-  top: 350px;
+  left: 2vw;
+  top: 15rem;
 }
 .next{
-  right: 20vw;
-  top: 350px;
-
+  right: 2vw;
+  top: 15rem;
 }
-.slide{
+/* .slide{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,18 +110,18 @@
 }
 .slide[data-active]{
   opacity: 1;
-} 
+}  */
 
 
-
+/* 
 .ease-in {
   animation: ease-in 1s forwards;
-}
+} */
 /* .slide-out {
   animation: ease-out 1s forwards;
 } */
 
-@keyframes easeIn {
+/* @keyframes easeIn {
   from {
     opacity: 0;
     transform: translateX(0);
@@ -114,4 +130,4 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
+} */

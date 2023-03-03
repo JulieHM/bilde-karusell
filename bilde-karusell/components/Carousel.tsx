@@ -12,11 +12,7 @@ export const Carousel = ({
   numberOfElements,
   backgroundColor,
 }: CarouselProps) => {
-  const [images, setImages] = React.useState<string[]>([]);
-  const [title, setTitles] = React.useState<string[]>([]);
-  const [text, setText] = React.useState<string[]>([]);
-  const [counter, setCounter] = React.useState<number>(0);
-  const [active, setActive] = React.useState(0);
+  const [data, setData] = React.useState<string[]>([]);
 
   useEffect(() => {
     const fetchImageData = async () => {
@@ -34,70 +30,46 @@ export const Carousel = ({
       const data = await response.json();
       console.log(data);
 
-      const newImages = data.photos.map((el: any) => el.src.landscape);
-      setImages([...newImages]);
-      const newTitles = data.photos.map((el: any) => el.alt);
-      setTitles([...newTitles]);
-      const newText = data.photos.map((el: any) => el.photographer);
-      setText([...newText]);
+      const newData = data.photos.map((el: any) => {
+        return { img: el.src.landscape, title: el.alt, text: el.photographer };
+      });
+      console.log(newData);
+      setData([...newData]);
     };
 
     fetchImageData();
   }, [numberOfElements]);
 
-  useEffect(() => {
-    setActive(counter);
-  }, [counter]);
-
-  const NextSlide = () => {
-    counter < images.length - 1 ? setCounter(counter + 1) : setCounter(0);
-  };
-
-  const PreviousSlide = () => {
-    counter == 0 ? setCounter(images.length - 1) : setCounter(counter - 1);
-  };
-
   return (
-    <>
+    <div
+      className={styles["carouselWrapper"]}
+      style={{ backgroundColor: `${backgroundColor}` }}
+    >
       <div
         className={styles["carousel"]}
         style={{ backgroundColor: `${backgroundColor}` }}
       >
-        <div>
-          <p>
-            {counter + 1}/{images.length}
-          </p>
-        </div>
-        <>
-          <button
-            onClick={PreviousSlide}
-            className={`${styles.slideButtons} ${styles.prev}`}
-          >
-            forrige
-          </button>
-          <button
-            className={`${styles.slideButtons} ${styles.next}`}
-            onClick={NextSlide}
-          >
-            neste
-          </button>
-        </>
-        <div className={counter == active ? styles["slide"] : styles["hidden"]}>
-          <>
+        <button className={`${styles.slideButtons} ${styles.prev}`}>
+          &#8592;
+        </button>
+        <button className={`${styles.slideButtons} ${styles.next}`}>
+          &#8594;
+        </button>
+        {data.map((el: any, index) => (
+          <div key={index} className={styles["itemWrapper"]}>
             <Image
-              src={images[counter]}
-              alt="image"
               className={styles["images"]}
-              width={500}
+              src={el.img}
+              alt={"image"}
+              key={index}
               height={500}
+              width={500}
             ></Image>
-            <div>
-              <h1 className={styles["h1"]}>{title[counter]}</h1>
-              <p>Fotograf: {text[counter]}</p>
-            </div>
-          </>
-        </div>
+            <h1 className={styles["title"]}>{el.title}</h1>
+            <p>Fotograf: {el.text}</p>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };

@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home({ data }: any) {
   const [backgroundColor, setBackgroundColor] = React.useState("");
   const [numberOfElements, setNumberOfElements] = React.useState(4);
-  const colors = ["#ECF2FF", "#3E54AC", "#655DBB", "#BFACE2"];
+  const colors = ["#eeeeee", "#ECF2FF", "#3E54AC", "#655DBB", "#BFACE2"];
 
   function handleNumberChange(event: any) {
     setNumberOfElements(event.target.value);
@@ -24,10 +24,7 @@ export default function Home({ data }: any) {
         <title>Create Next App</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
+        <link rel="stylesheet" />
       </Head>
       <a href="https://www.pexels.com">Photos provided by Pexels</a>
       <div className={styles["container"]}>
